@@ -13,7 +13,7 @@ class BookController extends Controller
     public function index()
     {
         // Retrieve all books from the database
-        $books = Book::all();
+        $books = Book::paginate(5);
 
         // Return the view with the books data
         return view('books.collections', compact('books'));

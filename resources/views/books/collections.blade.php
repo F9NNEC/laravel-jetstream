@@ -14,9 +14,9 @@
                     <table class="table-auto w-full border-collapse border border-gray-300">
                         <thead>
                             <tr>
-                                <th class="border border-gray-300 px-4 py-2">Judul</th>
-                                <th class="border border-gray-300 px-4 py-2">Penulis</th>
-                                <th class="border border-gray-300 px-4 py-2">Tahun Terbit</th>
+                                <th class="border border-gray-300 px-4 py-2">Title</th>
+                                <th class="border border-gray-300 px-4 py-2">Author</th>
+                                <th class="border border-gray-300 px-4 py-2">Published Year</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,6 +31,10 @@
                     </table>
                 @endif
             </div>
+            <div class="py-10">
+                {{ $books->links() }}
+            </div>
         </div>
     </div>
+    
 </x-app-layout>

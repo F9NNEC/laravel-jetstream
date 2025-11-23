@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,5 +16,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/books', [\App\Http\Controllers\BookController::class, 'index'])->name('books.collections');
+    Route::get('/books', [BookController::class, 'index'])->name('books.collections');
 });
