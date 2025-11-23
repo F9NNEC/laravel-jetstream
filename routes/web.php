@@ -14,4 +14,6 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/books', [\App\Http\Controllers\BookController::class, 'index'])->name('books.collections');
 });
