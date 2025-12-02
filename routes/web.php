@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,12 +14,10 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        if (Auth::user()->role === 'admin') {
-            return view('admin.dashboard');
-        } else {
-            return view('user.dashboard');
-        }
+        //
     })->name('dashboard');
 
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    
     Route::get('/books', [BookController::class, 'index'])->name('books.collections');
 });
