@@ -14,75 +14,28 @@
                 </div>
                 
                 <x-welcome />
-                
-                <div class="py-12 sm:px24 lg:px-32">
-                    <article class="relative overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg">
-                        <img alt="" src="https://images.unsplash.com/photo-1661956602116-aa6865609028?auto=format&amp;fit=crop&amp;q=80&amp;w=1160" class="absolute inset-0 h-full w-full object-cover">
-    
-                        <div class="relative bg-linear-to-t from-gray-900/50 to-gray-900/25 pt-32 sm:pt-48 lg:pt-64">
-                            <div class="p-4 sm:p-6">
-                            <time datetime="2022-10-10" class="block text-xs text-white/90"> 10th Oct 2022 </time>
-    
-                            <a href="#">
-                                <h3 class="mt-0.5 text-lg text-white">How to position your furniture for positivity</h3>
-                            </a>
-    
-                            <p class="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae dolores, possimus
-                                pariatur animi temporibus nesciunt praesentium dolore sed nulla ipsum eveniet corporis
-                                quidem, mollitia itaque minus soluta, voluptates neque explicabo tempora nisi culpa eius
-                                atque dignissimos. Molestias explicabo corporis voluptatem?
-                            </p>
-                            </div>
-                        </div>
-                    </article>
-                </div>                
 
+                @foreach($articles as $article)
                 <div class="py-12 sm:px24 lg:px-32">
                     <article class="relative overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg">
-                        <img alt="" src="https://images.unsplash.com/photo-1661956602116-aa6865609028?auto=format&amp;fit=crop&amp;q=80&amp;w=1160" class="absolute inset-0 h-full w-full object-cover">
-    
+                        <img alt="" src="{{ $article->image_url ?: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?auto=format&amp;fit=crop&amp;q=80&amp;w=1160' }}" class="absolute inset-0 h-full w-full object-cover">
+
                         <div class="relative bg-linear-to-t from-gray-900/50 to-gray-900/25 pt-32 sm:pt-48 lg:pt-64">
                             <div class="p-4 sm:p-6">
-                            <time datetime="2022-10-10" class="block text-xs text-white/90"> 10th Oct 2022 </time>
-    
-                            <a href="#">
-                                <h3 class="mt-0.5 text-lg text-white">How to position your furniture for positivity</h3>
+                            <time datetime="{{ $article->published_at ? $article->published_at->format('Y-m-d') : now()->format('Y-m-d') }}" class="block text-xs text-white/90"> {{ $article->published_at ? $article->published_at->format('jS M Y') : now()->format('jS M Y') }} </time>
+
+                            <a href="{{ route('articles.show', $article) }}">
+                                <h3 class="mt-0.5 text-lg text-white">{{ $article->title }}</h3>
                             </a>
-    
+
                             <p class="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae dolores, possimus
-                                pariatur animi temporibus nesciunt praesentium dolore sed nulla ipsum eveniet corporis
-                                quidem, mollitia itaque minus soluta, voluptates neque explicabo tempora nisi culpa eius
-                                atque dignissimos. Molestias explicabo corporis voluptatem?
+                                {{ Str::limit($article->content, 150) }}
                             </p>
                             </div>
                         </div>
                     </article>
                 </div>
-
-                <div class="py-12 sm:px24 lg:px-32">
-                    <article class="relative overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg">
-                        <img alt="" src="https://images.unsplash.com/photo-1661956602116-aa6865609028?auto=format&amp;fit=crop&amp;q=80&amp;w=1160" class="absolute inset-0 h-full w-full object-cover">
-    
-                        <div class="relative bg-linear-to-t from-gray-900/50 to-gray-900/25 pt-32 sm:pt-48 lg:pt-64">
-                            <div class="p-4 sm:p-6">
-                            <time datetime="2022-10-10" class="block text-xs text-white/90"> 10th Oct 2022 </time>
-    
-                            <a href="#">
-                                <h3 class="mt-0.5 text-lg text-white">How to position your furniture for positivity</h3>
-                            </a>
-    
-                            <p class="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae dolores, possimus
-                                pariatur animi temporibus nesciunt praesentium dolore sed nulla ipsum eveniet corporis
-                                quidem, mollitia itaque minus soluta, voluptates neque explicabo tempora nisi culpa eius
-                                atque dignissimos. Molestias explicabo corporis voluptatem?
-                            </p>
-                            </div>
-                        </div>
-                    </article>
-                </div>
+                @endforeach
 
             </div>
         </div>

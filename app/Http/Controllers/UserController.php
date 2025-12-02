@@ -10,9 +10,11 @@ class UserController extends Controller
     public function dashboard(){
     $user = Auth::user()->role;
         if ($user === 'admin') {
-            return view('admin.dashboard');
+            $articles = \App\Models\Article::orderBy('published_at', 'desc')->get();
+            return view('admin.dashboard', compact('articles'));
         } elseif ($user === 'user') {
-            return view('user.dashboard');
+            $articles = \App\Models\Article::orderBy('published_at', 'desc')->get();
+            return view('user.dashboard', compact('articles'));
         } else {
             return redirect()->back();
         }
