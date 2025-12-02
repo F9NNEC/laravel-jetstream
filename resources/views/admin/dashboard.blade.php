@@ -12,6 +12,7 @@
                     <h3 class="text-lg font-medium text-gray-900">Welcome, Admin!</h3>
                     <p class="mt-2 text-sm text-gray-600">Halooooooooo.</p>
                 </div>
+                <x-welcome />
             </div>
         </div>
     </div>
