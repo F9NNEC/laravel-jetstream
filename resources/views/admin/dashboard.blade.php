@@ -4,53 +4,39 @@
             {{ __('Admin Dashboard') }}
         </h2>
     </x-slot>
-
+    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mb-6">
-                <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900">Welcome, Admin!</h3>
-                    <p class="mt-2 text-sm text-gray-600">Manage your articles here.</p>
-                    <a href="{{ route('articles.create') }}" class="mt-4 inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150">Create New Article</a>
-                </div>
-            </div>
-
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900 mb-4">Articles</h3>
-                    @if($articles->count() > 0)
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Published At</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    @foreach($articles as $article)
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $article->title }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $article->published_at ? $article->published_at->format('M j, Y') : 'Not Published' }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                <a href="{{ route('articles.show', $article) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">View</a>
-                                                <a href="{{ route('articles.edit', $article) }}" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
-                                                <form method="POST" action="{{ route('articles.destroy', $article) }}" class="inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">Delete</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    @else
-                        <p class="text-gray-500">No articles found.</p>
-                    @endif
+                    <h3 class="text-lg font-medium text-gray-900">Welcome, Admin!</h3>
+                    <p class="mt-2 text-sm text-gray-600">Halooooooooo.</p>
                 </div>
+                
+                <x-welcome />
+
+                @foreach($articles as $article)
+                <div class="py-12 sm:px24 lg:px-32">
+                    <article class="relative overflow-hidden rounded-lg shadow-sm transition hover:shadow-lg">
+                        <img alt="" src="{{ $article->image_url ?: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?auto=format&amp;fit=crop&amp;q=80&amp;w=1160' }}" class="absolute inset-0 h-full w-full object-cover">
+
+                        <div class="relative bg-linear-to-t from-gray-900/50 to-gray-900/25 pt-32 sm:pt-48 lg:pt-64">
+                            <div class="p-4 sm:p-6">
+                            <time datetime="{{ $article->published_at ? $article->published_at->format('Y-m-d') : now()->format('Y-m-d') }}" class="block text-xs text-white/90"> {{ $article->published_at ? $article->published_at->format('jS M Y') : now()->format('jS M Y') }} </time>
+
+                            <a href="{{ route('articles.show', $article) }}">
+                                <h3 class="mt-0.5 text-lg text-white">{{ $article->title }}</h3>
+                            </a>
+
+                            <p class="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
+                                {{ Str::limit($article->content, 150) }}
+                            </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                @endforeach
+
             </div>
         </div>
     </div>

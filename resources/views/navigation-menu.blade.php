@@ -16,6 +16,15 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                @if(Auth::user()->role === 'admin')
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('admin.manage_articles') }}" :active="request()->routeIs('admin.manage_articles')">
+                        {{ __('Manage Articles') }}
+                    </x-nav-link>
+                </div>
+                @endif
+
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('books.collections') }}" :active="request()->routeIs('books.collections')">
                         {{ __('Books Collections') }}
