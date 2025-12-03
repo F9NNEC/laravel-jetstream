@@ -25,7 +25,7 @@
                             <time datetime="{{ $article->published_at ? $article->published_at->format('Y-m-d') : now()->format('Y-m-d') }}" class="block text-xs text-white/90" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);"> {{ $article->published_at ? $article->published_at->format('jS M Y') : now()->format('jS M Y') }} </time>
 
                             <a href="{{ route('articles.show', $article) }}">
-                                <h3 class="mt-0.5 text-lg text-white hover:text-indigo-500" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">{{ $article->title }}</h3>
+                                <h3 class="mt-0.5 text-lg text-white hover:text-indigo-500" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-weight: bold;">{{ $article->title }}</h3>
                             </a>
 
                             <p class="mt-2 line-clamp-3 text-sm/relaxed text-white/95" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
