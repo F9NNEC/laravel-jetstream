@@ -20,6 +20,8 @@ Route::middleware([
 
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     
+    Route::get('/manage', [UserController::class, 'manage'])->middleware('role:admin')->name('admin.manage_articles');
+
     Route::get('/books', [BookController::class, 'index'])->name('books.collections');
 
     Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');

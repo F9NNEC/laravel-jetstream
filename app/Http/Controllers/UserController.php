@@ -19,4 +19,8 @@ class UserController extends Controller
             return redirect()->back();
         }
     }
+    public function manage(){
+        $articles = \App\Models\Article::orderBy('published_at', 'desc')->get();
+        return view('admin.manage_articles', compact('articles'));
+    }
 }
