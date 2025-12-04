@@ -30,7 +30,7 @@
                             <div
                                 class="mt-3 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
                                 <div class="">
-                                    <a href="#"
+                                    <a href="{{ route('articles.show', $article) }}"
                                         class="text-xs text-indigo-600 uppercase font-medium hover:text-gray-900 transition duration-500 ease-in-out">
                                         Article
                                     </a>
