@@ -30,12 +30,6 @@
                     </x-nav-link>
                 </div>
                 @endif
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('books.collections') }}" :active="request()->routeIs('books.collections')">
-                        {{ __('Books Collections') }}
-                    </x-nav-link>
-                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
