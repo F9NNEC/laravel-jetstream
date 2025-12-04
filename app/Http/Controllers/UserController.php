@@ -9,12 +9,13 @@ class UserController extends Controller
 {
     public function dashboard(){
     $user = Auth::user()->role;
+        $all_articles = \App\Models\Article::orderBy('published_at', 'desc')->get();
+        $newest_articles = $all_articles->take(7);
+        $older_articles = $all_articles->skip(7);
         if ($user === 'admin') {
-            $articles = \App\Models\Article::orderBy('published_at', 'desc')->get();
-            return view('admin.dashboard', compact('articles'));
+            return view('admin.dashboard', compact('newest_articles', 'older_articles'));
         } elseif ($user === 'user') {
-            $articles = \App\Models\Article::orderBy('published_at', 'desc')->get();
-            return view('user.dashboard', compact('articles'));
+            return view('user.dashboard', compact('newest_articles', 'older_articles'));
         } else {
             return redirect()->back();
         }
