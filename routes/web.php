@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -31,4 +32,8 @@ Route::middleware([
     Route::get('/articles/{article}/edit', [ArticleController::class, 'edit'])->middleware('role:admin')->name('articles.edit');
     Route::put('/articles/{article}', [ArticleController::class, 'update'])->middleware('role:admin')->name('articles.update');
     Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->middleware('role:admin')->name('articles.destroy');
+    Route::post('/articles/{article}/comments', [CommentController::class, 'store'])->middleware('auth')->name('articles.comments.store');
+    Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->middleware('auth')->name('comments.edit');
+    Route::put('/comments/{comment}', [CommentController::class, 'update'])->middleware('auth')->name('comments.update');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->middleware('auth')->name('comments.destroy');
 });
