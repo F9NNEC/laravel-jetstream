@@ -21,7 +21,7 @@ class UserController extends Controller
         }
     }
     public function manage(){
-        $articles = \App\Models\Article::orderBy('published_at', 'desc')->get();
+        $articles = \App\Models\Article::orderBy('published_at', 'desc')->paginate(5);
         return view('admin.manage_articles', compact('articles'));
     }
 }

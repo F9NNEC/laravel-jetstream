@@ -11,7 +11,10 @@
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-medium text-gray-900">All Articles</h3>
+
+                    @if(Auth::user()->role === 'admin')
                         <a href="{{ route('articles.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring ring-blue-300 disabled:opacity-25 transition ease-in-out duration-150">Create New Article</a>
+                    @endif
                     </div>
 
                     @if($articles->count() > 0)
@@ -31,12 +34,15 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $article->published_at ? $article->published_at->format('M j, Y') : 'Not Published' }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                                 <a href="{{ route('articles.show', $article) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">View</a>
+
+                                                @if(Auth::user()->role === 'admin')
                                                 <a href="{{ route('articles.edit', $article) }}" class="text-blue-600 hover:text-blue-900 mr-3">Edit</a>
                                                 <form method="POST" action="{{ route('articles.destroy', $article) }}" class="inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">Delete</button>
                                                 </form>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -47,6 +53,9 @@
                         <p class="text-gray-500">No articles found.</p>
                     @endif
                 </div>
+            </div>
+            <div class="py-10">
+            {{ $articles->links() }}
             </div>
         </div>
     </div>

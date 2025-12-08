@@ -52,6 +52,9 @@
                     @endif
                 </div>
             </div>
+            <div class="py-10">
+            {{ $articles->links() }}
+            </div>
         </div>
     </div>
 </x-app-layout>
