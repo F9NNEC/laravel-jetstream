@@ -29,7 +29,7 @@ class ArticleController extends Controller
 
         Article::create($request->all());
 
-        return redirect()->route('articles.index')->with('success', 'Article created successfully.');
+        return redirect()->route('admin.manage_articles')->with('success', 'Article created successfully.');
     }
 
     public function show(Article $article)
@@ -53,13 +53,21 @@ class ArticleController extends Controller
 
         $article->update($request->all());
 
-        return redirect()->route('articles.index')->with('success', 'Article updated successfully.');
+        return redirect()->route('admin.manage_articles')->with('success', 'Article updated successfully.');
     }
 
     public function destroy(Article $article)
     {
         $article->delete();
 
-        return redirect()->route('articles.index')->with('success', 'Article deleted successfully.');
+        return redirect()->route('admin.manage_articles')->with('success', 'Article deleted successfully.');
+    }
+
+    public function dashboard()
+    {
+        $all_articles = Article::orderBy('published_at', 'desc')->get();
+        $newest_articles = $all_articles->take(14);
+        $older_articles = $all_articles->skip(14);
+        return view('dashboard', compact('newest_articles', 'older_articles'));
     }
 }
