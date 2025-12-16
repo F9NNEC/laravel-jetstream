@@ -10,12 +10,12 @@ class UserController extends Controller
     public function dashboard(){
     $user = Auth::user()->role;
         $all_articles = \App\Models\Article::orderBy('published_at', 'desc')->get();
-        $newest_articles = $all_articles->take(7);
-        $older_articles = $all_articles->skip(7);
+        $newest_articles = $all_articles->take(14);
+        $older_articles = $all_articles->skip(14);
         if ($user === 'admin') {
-            return view('admin.dashboard', compact('newest_articles', 'older_articles'));
+            return view('dashboard', compact('newest_articles', 'older_articles'));
         } elseif ($user === 'user') {
-            return view('user.dashboard', compact('newest_articles', 'older_articles'));
+            return view('dashboard', compact('newest_articles', 'older_articles'));
         } else {
             return redirect()->back();
         }
